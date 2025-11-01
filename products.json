@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "Camera",
+        "price": 40000,
+        "image": "cam1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Gaming Console",
+        "price": 50000,
+        "image": "console.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Earpods",
+        "price": 8000,
+        "image": "ear1.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Lamp",
+        "price": 4000,
+        "image": "lamp.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Headphones",
+        "price": 20000,
+        "image": "headphone.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Phones",
+        "price": 140000,
+        "image": "phone1.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Smartwatch",
+        "price": 20000,
+        "image": "smartwatch.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Laptops",
+        "price": 70000,
+        "image": "lappie.jpg"
+    }
+]

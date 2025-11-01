@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="nav-logo border">
+                <div class="logo"></div>
+            </div>
+            <div class="nav-adresses border">
+                <p class="nav-second">About us</p>
+            </div>
+            <div class="nav-search">
+                <select class="select-search">
+                    <option>All</option>
+                    <option>Camera</option>
+                    <option>Gaming Console</option>
+                    <option>Earpods</option>
+                    <option>Headphones</option>
+                    <option>Phones</option>
+                    <option>Smartwatch</option>
+                    <option>Laptops</option>
+                </select>
+                <input placeholder="Search Gadgets" class="search-input">
+                <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            </div>
+            <div class="sign-in border">
+                <a href="SignIn.html" style="text-decoration: none;color:white;"><p><span>Hello, sign in</span></p></a>
+                <p class="nav-second">Account & Lists</p>
+            </div>
+            <div class="nav-return border">
+                <p><span>Returns</span></p>
+                <p class="nav-second"> & Orders</p>
+            </div>
+            <div class="nav-cart border">
+                <a class="w1" href="#" style="text-decoration: none; color:#f3f3f3">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cartCount">0</span> 
+                </a>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-all border">
+                <i class="fa-solid fa-bars"></i>
+                All
+            </div>
+            <div class="panel-ops ">
+                <p>Today's Deals</p>
+                <p>Customer Service</p>
+                <p>Registry</p>
+                <p>Gift Cards</p>
+                <p>Sell</p>
+            </div>
+            <div class="panel-deals border">
+                Shop deals in Electronics
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <div class="hero-msg">You are on Electro.com. You can also shop on Electro for hundreds of gadgets with fast local delivery.<pre> <a href="#"> Click here to go to Electro.in</a></pre></div>
+    </div>
+
+    <div class="shop-section">
+        <!-- Product items will be populated here by JavaScript -->
+    </div>
+
+    <footer>
+        <div class="foot-panel1">Back to Top</div>
+        <div class="foot-panel2">
+            <ul class="foot">
+                <p>Get to Know Us</p>
+                <a>Careers</a>
+                <a>Blog</a>
+                <a>About Electro</a>
+                <a>Electronics Devices</a>
+            </ul>
+            <ul class="foot">
+                <p>Make Money with Us</p>
+                <a>Sell on Electro Business</a>
+                <a>Sell gadgets on Electro</a>
+                <a>Become an Affiliate</a>
+                <a>Advertise your Products</a>
+                <a>Self-Publish with Us</a>
+            </ul>
+            <ul class="foot">
+                <p>Electro Payment Products</p>
+                <a>Electro Business Card</a>
+                <a>Shop With Points</a>
+                <a>Reload Your Balance</a>
+            </ul>
+            <ul class="foot">
+                <p>Let Us Help You</p>
+                <a>Your Account</a>
+                <a>Shipping Rates & Policies</a>
+                <a>Returns & Replacements</a>
+                <a>Manage Your Content & Devices</a>
+                <a>Electro Assistant</a>
+                <a>Help</a>
+            </ul>
+        </div>
+        <div class="foot-panel3">
+            <div class="logo"></div>
+        </div>
+        <div class="foot-panel4">
+            <div class="pages">
+                <a>Conditions of Use</a>
+                <a>Privacy Notice</a>
+                <a>Your Ads Privacy Choices</a>
+            </div>
+            <div class="copyright">© 2023-2024, or its affiliates</div>
+        </div>
+    </footer>
+
+    <div class="showCart">
+        <div class="cartTab">
+            <h1>Shopping Cart</h1>
+            <div class="totalAmount"></div> <!-- Total Amount Display -->
+            <div class="ListCart">
+                <!-- Cart items will be populated here by JavaScript -->
+            </div>
+            <div class="btn">
+                <button class="close">CLOSE</button>
+                <!-- In your existing HTML file -->
+                <button class="checkOut" onclick="redirectToPayment()">CHECKOUT</button>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

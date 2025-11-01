@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+
+        <div class="signup">
+            <form id="signupForm">
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input type="text" id="signupUsername" placeholder="User name" required="">
+                <input type="email" id="signupEmail" placeholder="Email" required="">
+                <input type="password" id="signupPassword" placeholder="Password" required="">
+                <button type="submit">Sign up</button>
+            </form>
+        </div>
+        
+        <div class="login">
+            <form id="loginForm">
+                <label for="chk" aria-hidden="true">Login</label>
+                <input type="email" id="loginEmail" placeholder="Email" required="">
+                <input type="password" id="loginPassword" placeholder="Password" required="">
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        
+    </div>
+    
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+            const username = document.getElementById('signupUsername').value;
+            const email = document.getElementById('signupEmail').value;
+
+            // Save to local storage
+            localStorage.setItem('username', username);
+            localStorage.setItem('email', email);
+
+            // Optionally redirect or show a message
+            alert('Signed up successfully! User details saved in local storage.');
+            console.log(`Name: ${username} Email: ${email} Password: ......`);
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Normally, you would send the credentials to the server for validation here.
+
+            // Redirect to index.html
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
