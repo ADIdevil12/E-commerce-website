@@ -20,7 +20,7 @@
 }
 
 .logo {
-    background-image: url(/ekki.png);
+    background-image: url(ekki.png);
     background-size: cover;
     height: 50px;
 }
@@ -149,7 +149,7 @@ span {
 
 /* Hero section */
 .hero-section {
-    background-image: url(/untitled.png);
+    background-image: url(untitled.png);
     background-size: cover;
     height: 750px;
     display: flex;
@@ -291,7 +291,7 @@ ul a {
 
 .logo {
 
-    background-image: url(/ekki.png);
+    background-image: url(ekki.png);
     background-size: cover;
     height: 50px;
     width: 100px;
