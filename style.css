@@ -290,11 +290,8 @@ ul a {
 }
 
 .logo {
-<<<<<<< HEAD
+
     background-image: url(/ekki.png);
-=======
-    background-image: url(/Screenshot\ 2024-12-02\ 013102.jpg);
->>>>>>> cfd5ccd9bec46d78fdbbebeb646cf8fb05921d83
     background-size: cover;
     height: 50px;
     width: 100px;
