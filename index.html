@@ -9,42 +9,77 @@
 </head>
 <body>
     <header>
-        <div class="navbar">
-            <div class="nav-logo border">
-                <div class="logo"></div>
-            </div>
-            <div class="nav-adresses border">
-                <p class="nav-second">About us</p>
-            </div>
-            <div class="nav-search">
-                <select class="select-search">
-                    <option>All</option>
-                    <option>Camera</option>
-                    <option>Gaming Console</option>
-                    <option>Earpods</option>
-                    <option>Headphones</option>
-                    <option>Phones</option>
-                    <option>Smartwatch</option>
-                    <option>Laptops</option>
-                </select>
-                <input placeholder="Search Gadgets" class="search-input">
-                <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-            </div>
-            <div class="sign-in border">
-                <a href="SignIn.html" style="text-decoration: none;color:white;"><p><span>Hello, sign in</span></p></a>
-                <p class="nav-second">Account & Lists</p>
-            </div>
-            <div class="nav-return border">
-                <p><span>Returns</span></p>
-                <p class="nav-second"> & Orders</p>
-            </div>
-            <div class="nav-cart border">
-                <a class="w1" href="#" style="text-decoration: none; color:#f3f3f3">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="cartCount">0</span> 
-                </a>
-            </div>
-        </div>
+        <!-- Navbar -->
+<div class="navbar">
+  <!-- Logo -->
+  <div class="nav-logo border">
+    <div class="logo"></div>
+  </div>
+
+  <!-- About Us -->
+  <div class="nav-adresses border">
+    <p class="nav-second">About us</p>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="nav-search">
+    <select class="select-search">
+      <option>All</option>
+      <option>Camera</option>
+      <option>Gaming Console</option>
+      <option>Earpods</option>
+      <option>Headphones</option>
+      <option>Phones</option>
+      <option>Smartwatch</option>
+      <option>Laptops</option>
+    </select>
+    <input placeholder="Search Gadgets" class="search-input" />
+    <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+  </div>
+
+  <!-- Hamburger menu (visible only on mobile) -->
+  <div class="menu-toggle">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+
+  <!-- Hidden dropdown menu for small screens -->
+  <div class="menu-list">
+    <a href="#">About Us</a>
+    <a href="SignIn.html">Sign In</a>
+    <a href="#">Returns & Orders</a>
+    <a href="#">Cart</a>
+  </div>
+
+  <!-- Mobile Cart (only for mobile view) -->
+ <!-- Mobile Sliding Cart -->
+<div id="mobileCart" class="mobile-cart">
+  <h2>Your Cart</h2>
+  <div class="cart-items"></div>
+  <div class="cart-total">Total: ₹<span id="mobile-total">0</span></div>
+  <button class="close-mobile-cart">Close</button>
+</div>
+  <!-- Sign In -->
+  <div class="sign-in border">
+    <a href="SignIn.html" style="text-decoration: none; color: white;">
+      <p><span>Hello, sign in</span></p>
+    </a>
+    <p class="nav-second">Account & Lists</p>
+  </div>
+
+  <!-- Returns -->
+  <div class="nav-return border">
+    <p><span>Returns</span></p>
+    <p class="nav-second">& Orders</p>
+  </div>
+
+  <!-- Cart -->
+  <div class="nav-cart border">
+    <a class="w1" href="#" style="text-decoration: none; color: #f3f3f3">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cartCount">0</span>
+    </a>
+  </div>
+</div>
         <div class="panel">
             <div class="panel-all border">
                 <i class="fa-solid fa-bars"></i>
@@ -133,7 +168,72 @@
             </div>
         </div>
     </div>
+    <script>
+  const mobileCart = document.getElementById("mobileCart");
+  const menuCartLink = document.querySelector(".menu-list a:last-child");
+  const closeMobileCart = document.querySelector(".close-mobile-cart");
 
+  // Open mobile cart when "Cart" in menu is clicked
+  if (menuCartLink) {
+    menuCartLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      document.querySelector(".menu-list").classList.remove("active");
+      mobileCart.classList.add("active");
+    });
+  }
+
+  // Close button
+  if (closeMobileCart) {
+    closeMobileCart.addEventListener("click", () => {
+      mobileCart.classList.remove("active");
+    });
+  }
+</script>
+
+    <!-- Cart Overlay and Sidebar (for Mobile) -->
+<div class="cart-overlay"></div>
+
+<div class="cart-sidebar">
+  <button class="cart-close">✖</button>
+  <h3>Your Cart</h3>
+  <div class="cart-items"></div>
+</div>
+<!-- Cart Overlay and Sidebar (for Mobile) -->
+<div class="cart-overlay"></div>
+
+<div class="cart-sidebar">
+  <button class="cart-close">✖</button>
+  <h3>Your Cart</h3>
+  <div class="cart-items"></div>
+</div>
+
+<script>
+  // ✅ Ensure mobile cart shows the same items as laptop cart
+  function updateMobileCart() {
+    const mobileCartItems = document.querySelector(".mobile-cart .cart-items");
+    const mainCartItems = document.querySelector(".ListCart");
+
+    if (!mobileCartItems || !mainCartItems) return;
+
+    // Copy inner HTML from main cart
+    mobileCartItems.innerHTML = mainCartItems.innerHTML;
+
+    // Update total if available
+    const totalElement = document.querySelector(".totalAmount");
+    const mobileTotal = document.getElementById("mobile-total");
+    if (totalElement && mobileTotal) {
+      const totalValue = totalElement.textContent.replace(/[^\d]/g, '');
+      mobileTotal.textContent = totalValue || "0";
+    }
+  }
+
+  // Hook update function into your main cart logic
+  // Run updateMobileCart whenever user adds item to cart or removes
+  const observer = new MutationObserver(updateMobileCart);
+  const target = document.querySelector(".ListCart");
+  if (target) observer.observe(target, { childList: true, subtree: true });
+</script>
     <script src="app.js"></script>
+
 </body>
 </html>

@@ -16,7 +16,29 @@ document.addEventListener('DOMContentLoaded', () => {
     closeCart.addEventListener('click', () => {
         cart.classList.remove("visible");
     });
+    // --- Mobile Cart Toggle ---
+const mobileCartIcon = document.querySelector('.menu-list a[href="#cart"]');
+const mobileCart = document.querySelector('.cart-sidebar');
+const mobileOverlay = document.querySelector('.cart-overlay');
+const closeMobileCart = document.querySelector('.cart-close');
 
+// Open mobile cart
+if (mobileCartIcon) {
+  mobileCartIcon.addEventListener('click', (e) => {
+    e.preventDefault();
+    updateMobileCartDisplay(); // reflect latest items
+    mobileCart.classList.add('active');
+    mobileOverlay.classList.add('active');
+  });
+}
+
+// Close mobile cart
+if (closeMobileCart) {
+  closeMobileCart.addEventListener('click', () => {
+    mobileCart.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+  });
+}
     // Fetch the products from the JSON file
     fetch('products.json')
         .then(response => {
@@ -85,7 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItems.push({ ...product, quantity: 1 }); // Add new product with quantity
         }
         updateCartDisplay();
-        updateCartCount(); // Update cart count
+        updateCartCount();
+        updateMobileCartDisplay(); // Update cart count
     }
 
     // Function to update the cart display
@@ -136,7 +159,34 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    
+    // Function to update mobile cart sidebar
+function updateMobileCartDisplay() {
+  const mobileCartContainer = document.querySelector('.cart-sidebar .cart-items') || document.querySelector('.mobile-cart .cart-items');
+  if (!mobileCartContainer) return;
 
+  mobileCartContainer.innerHTML = ''; // Clear existing mobile cart
+
+  let totalAmount = 0;
+
+  cartItems.forEach(item => {
+    const itemDiv = document.createElement('div');
+    itemDiv.classList.add('item');
+    itemDiv.innerHTML = `
+      <div class="image"><img src="${item.image}" alt="${item.name}"></div>
+      <div class="details">
+        <span class="name">${item.name}</span>
+        <span class="qty">x${item.quantity}</span>
+      </div>
+      <div class="price">₹${item.price * item.quantity}</div>
+    `;
+    mobileCartContainer.appendChild(itemDiv);
+    totalAmount += item.price * item.quantity;
+  });
+
+  const totalEl = document.querySelector('.cart-sidebar .mobile-total');
+  if (totalEl) totalEl.textContent = `Total: ₹${totalAmount}`;
+}
     // Function to update cart count displayed
     function updateCartCount() {
         const cartCountElement = document.getElementById('cartCount');
@@ -170,3 +220,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+
+ document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menuList = document.querySelector(".menu-list");
+
+  if (menuToggle && menuList) {
+    menuToggle.addEventListener("click", () => {
+      menuList.classList.toggle("active");
+    });
+  }
+});
+
+
+
+
+
+
+

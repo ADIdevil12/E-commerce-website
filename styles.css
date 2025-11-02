@@ -101,3 +101,189 @@ button:hover{
     transform:scale(.6);
 
 }
+
+/* ---------- Responsive Design for 430px and below ---------- */
+/* ---------------- Responsive Design for 430px and below ---------------- */
+@media (max-width: 430px) {
+    /* Navbar */
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 10px;
+        height: auto;
+    }
+
+    .nav-logo {
+        width: 70px;
+        height: 40px;
+    }
+
+    .nav-search {
+        display: flex;
+        flex: 1;
+        margin: 5px 10px;
+        height: 35px;
+        max-width: 75%;
+    }
+
+    .select-search {
+        width: 45px;
+        font-size: 0.75rem;
+    }
+
+    .search-input {
+        font-size: 0.85rem;
+    }
+
+    .search-icon {
+        width: 38px;
+        font-size: 0.9rem;
+    }
+
+    /* Hide unnecessary nav items on small screen */
+    .nav-adresses,
+    .sign-in,
+    .nav-return,
+    .nav-cart {
+        display: none;
+    }
+
+    /* Show fa-bars icon clearly */
+    .panel-all {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    /* Keep panel items stacked */
+    .panel {
+        flex-direction: column;
+        align-items: center;
+        padding: 8px 0;
+        height: auto;
+        text-align: center;
+    }
+
+    .panel-ops {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .panel-ops p {
+        margin: 5px 8px;
+        font-size: 0.8rem;
+    }
+
+    /* Hero section */
+    .hero-section {
+        height: 250px;
+        background-size: cover;
+    }
+
+    .hero-msg {
+        font-size: 0.8rem;
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    /* Shop section */
+    .shop-section {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    
+
+    .box {
+        width: 95%;
+        height: auto;
+        margin: 15px 0;
+    }
+
+    .box-image {
+        height: 220px;
+        border-radius: 10px;
+    }
+
+    .box-content h4 {
+        font-size: 1rem;
+    }
+
+    .box-content p {
+        font-size: 0.85rem;
+    }
+
+    /* Cart Sidebar */
+    .showCart {
+        width: 90%;
+        height: 80%;
+        right: -500px;
+    }
+
+    .showCart.visible {
+        right: 0;
+    }
+
+    .cartTab h1 {
+        font-size: 1.2rem;
+    }
+
+    .btn button {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .image img {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 10px;
+    }
+
+    .quantity {
+        margin: 8px 0;
+    }
+
+    /* Footer */
+    .foot-panel2 {
+        flex-direction: column;
+        height: auto;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    ul a {
+        margin-top: 8px;
+        font-size: 0.8rem;
+    }
+
+    .foot-panel3 {
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .foot-panel4 {
+        height: auto;
+        font-size: 0.7rem;
+        padding: 10px;
+    }
+
+    .pages {
+        padding-top: 10px;
+    }
+
+    .corn {
+        margin-left: 0;
+        right: 20px;
+        bottom: 10px;
+    }
+}
