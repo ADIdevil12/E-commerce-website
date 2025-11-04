@@ -50,14 +50,7 @@
     <a href="#">Cart</a>
   </div>
 
-  <!-- Mobile Cart (only for mobile view) -->
- <!-- Mobile Sliding Cart -->
-<div id="mobileCart" class="mobile-cart">
-  <h2>Your Cart</h2>
-  <div class="cart-items"></div>
-  <div class="cart-total">Total: ₹<span id="mobile-total">0</span></div>
-  <button class="close-mobile-cart">Close</button>
-</div>
+  
   <!-- Sign In -->
   <div class="sign-in border">
     <a href="SignIn.html" style="text-decoration: none; color: white;">
@@ -168,70 +161,69 @@
             </div>
         </div>
     </div>
-    <script>
-  const mobileCart = document.getElementById("mobileCart");
-  const menuCartLink = document.querySelector(".menu-list a:last-child");
-  const closeMobileCart = document.querySelector(".close-mobile-cart");
+   
 
-  // Open mobile cart when "Cart" in menu is clicked
-  if (menuCartLink) {
-    menuCartLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      document.querySelector(".menu-list").classList.remove("active");
-      mobileCart.classList.add("active");
-    });
-  }
-
-  // Close button
-  if (closeMobileCart) {
-    closeMobileCart.addEventListener("click", () => {
-      mobileCart.classList.remove("active");
-    });
-  }
-</script>
-
-    <!-- Cart Overlay and Sidebar (for Mobile) -->
+<!-- MOBILE CART SIDEBAR -->
 <div class="cart-overlay"></div>
-
 <div class="cart-sidebar">
-  <button class="cart-close">✖</button>
-  <h3>Your Cart</h3>
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <button class="cart-close">×</button>
+  </div>
   <div class="cart-items"></div>
+  <div class="mobile-total">Total: ₹0</div>
 </div>
-<!-- Cart Overlay and Sidebar (for Mobile) -->
-<div class="cart-overlay"></div>
 
-<div class="cart-sidebar">
-  <button class="cart-close">✖</button>
-  <h3>Your Cart</h3>
-  <div class="cart-items"></div>
-</div>
+
 
 <script>
-  // ✅ Ensure mobile cart shows the same items as laptop cart
-  function updateMobileCart() {
-    const mobileCartItems = document.querySelector(".mobile-cart .cart-items");
-    const mainCartItems = document.querySelector(".ListCart");
+function updateMobileCartDisplay() {
+  const mobileCartContainer = document.querySelector('.cart-sidebar .cart-items');
+  const mainCart = document.querySelector('.ListCart');
+  if (!mobileCartContainer || !mainCart) return;
 
-    if (!mobileCartItems || !mainCartItems) return;
+  mobileCartContainer.innerHTML = mainCart.innerHTML;
 
-    // Copy inner HTML from main cart
-    mobileCartItems.innerHTML = mainCartItems.innerHTML;
-
-    // Update total if available
-    const totalElement = document.querySelector(".totalAmount");
-    const mobileTotal = document.getElementById("mobile-total");
-    if (totalElement && mobileTotal) {
-      const totalValue = totalElement.textContent.replace(/[^\d]/g, '');
-      mobileTotal.textContent = totalValue || "0";
-    }
+  // Copy total
+  const mainTotal = document.querySelector('.totalAmount');
+  const mobileTotalContainer = document.querySelector('.mobile-total');
+  if (mainTotal && mobileTotalContainer) {
+    mobileTotalContainer.textContent = mainTotal.textContent;
   }
 
-  // Hook update function into your main cart logic
-  // Run updateMobileCart whenever user adds item to cart or removes
-  const observer = new MutationObserver(updateMobileCart);
-  const target = document.querySelector(".ListCart");
-  if (target) observer.observe(target, { childList: true, subtree: true });
+  // Hook up + and - buttons
+  mobileCartContainer.querySelectorAll('.plus, .minus').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.closest('.item')?.querySelector('.name')?.textContent;
+      if (btn.classList.contains('plus')) adjustQuantity(name, 1);
+      else adjustQuantity(name, -1);
+      updateMobileCartDisplay();
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileCart = document.querySelector('.cart-sidebar');
+  const overlay = document.querySelector('.cart-overlay');
+  const menuCart = document.querySelector('.menu-list a:last-child');
+  const closeCartBtn = document.querySelector('.cart-close');
+
+  // --- OPEN MOBILE CART ---
+  menuCart.addEventListener('click', (e) => {
+    e.preventDefault();
+    updateMobileCartDisplay(); // always sync
+    mobileCart.classList.add('active');
+    overlay.classList.add('active');
+  });
+
+  // --- CLOSE MOBILE CART ---
+  const closeCart = () => {
+    mobileCart.classList.remove('active');
+    overlay.classList.remove('active');
+  };
+  closeCartBtn.addEventListener('click', closeCart);
+  overlay.addEventListener('click', closeCart);
+});
 </script>
     <script src="app.js"></script>
 

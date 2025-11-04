@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     // --- Mobile Cart Toggle ---
 const mobileCartIcon = document.querySelector('.menu-list a[href="#cart"]');
-const mobileCart = document.querySelector('.cart-sidebar');
+
 const mobileOverlay = document.querySelector('.cart-overlay');
 const closeMobileCart = document.querySelector('.cart-close');
 
@@ -159,34 +159,9 @@ if (closeMobileCart) {
             });
         });
     }
-    
+   
     // Function to update mobile cart sidebar
-function updateMobileCartDisplay() {
-  const mobileCartContainer = document.querySelector('.cart-sidebar .cart-items') || document.querySelector('.mobile-cart .cart-items');
-  if (!mobileCartContainer) return;
 
-  mobileCartContainer.innerHTML = ''; // Clear existing mobile cart
-
-  let totalAmount = 0;
-
-  cartItems.forEach(item => {
-    const itemDiv = document.createElement('div');
-    itemDiv.classList.add('item');
-    itemDiv.innerHTML = `
-      <div class="image"><img src="${item.image}" alt="${item.name}"></div>
-      <div class="details">
-        <span class="name">${item.name}</span>
-        <span class="qty">x${item.quantity}</span>
-      </div>
-      <div class="price">₹${item.price * item.quantity}</div>
-    `;
-    mobileCartContainer.appendChild(itemDiv);
-    totalAmount += item.price * item.quantity;
-  });
-
-  const totalEl = document.querySelector('.cart-sidebar .mobile-total');
-  if (totalEl) totalEl.textContent = `Total: ₹${totalAmount}`;
-}
     // Function to update cart count displayed
     function updateCartCount() {
         const cartCountElement = document.getElementById('cartCount');
@@ -203,9 +178,79 @@ function updateMobileCartDisplay() {
                 cartItems = cartItems.filter(item => item.name !== name); // Remove item if quantity is zero
             }
             updateCartDisplay();
-            updateCartCount(); // Update count when quantity changes
+            updateCartCount();
+            updateMobileCartDisplay(); // Update count when quantity changes
         }
     }
+
+function updateMobileCartDisplay() {
+  const mobileCartContainer = document.querySelector('.cart-sidebar .cart-items');
+  if (!mobileCartContainer) return;
+
+  mobileCartContainer.innerHTML = ''; // Clear current items
+  let totalAmount = 0;
+
+  cartItems.forEach(item => {
+    const div = document.createElement('div');
+    div.classList.add('item');
+    div.innerHTML = `
+      <div class="image"><img src="${item.image}" alt="${item.name}"></div>
+      <div class="details">
+        <span class="name">${item.name}</span>
+        <div class="qty-controls">
+          <span class="minus" data-name="${item.name}" style="cursor:pointer;">−</span>
+          <span class="qty-value">${item.quantity}</span>
+          <span class="plus" data-name="${item.name}" style="cursor:pointer;">+</span>
+        </div>
+      </div>
+      <div class="price">₹${item.price * item.quantity}</div>
+    `;
+    mobileCartContainer.appendChild(div);
+    totalAmount += item.price * item.quantity;
+  });
+
+  const totalEl = document.querySelector('.cart-sidebar .mobile-total');
+  if (totalEl) totalEl.textContent = `Total: ₹${totalAmount}`;
+
+  // ✅ Fix: Use event delegation (works for dynamically re-rendered elements)
+  mobileCartContainer.removeEventListener('click', handleMobileCartClick);
+  mobileCartContainer.addEventListener('click', handleMobileCartClick);
+}
+
+// --- Helper for event delegation ---
+function handleMobileCartClick(e) {
+  if (e.target.classList.contains('plus')) {
+    adjustQuantity(e.target.dataset.name, 1);
+  } else if (e.target.classList.contains('minus')) {
+    adjustQuantity(e.target.dataset.name, -1);
+  }
+}
+
+function handleMobileCartClick(e) {
+  if (e.target.classList.contains('plus')) {
+    adjustQuantity(e.target.dataset.name, 1);
+  } else if (e.target.classList.contains('minus')) {
+    adjustQuantity(e.target.dataset.name, -1);
+  }
+
+  // Add a quick “pop” effect
+  const qtySpan = e.target.closest('.qty-controls')?.querySelector('.qty-value');
+  if (qtySpan) {
+    qtySpan.style.transform = 'scale(1.2)';
+    qtySpan.style.transition = 'transform 0.2s';
+    setTimeout(() => (qtySpan.style.transform = 'scale(1)'), 150);
+  }
+}
+
+// --- Helper for event delegation ---
+function handleMobileCartClick(e) {
+  if (e.target.classList.contains('plus')) {
+    adjustQuantity(e.target.dataset.name, 1);
+  } else if (e.target.classList.contains('minus')) {
+    adjustQuantity(e.target.dataset.name, -1);
+  }
+}
+
 
     // Function to redirect to the payment page
     document.querySelector('.checkOut').addEventListener('click', () => {
@@ -232,10 +277,5 @@ function updateMobileCartDisplay() {
     });
   }
 });
-
-
-
-
-
 
 
